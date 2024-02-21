@@ -4,6 +4,10 @@ go 1.21
 
 replace github.com/templexxx/cpu v0.0.7 => github.com/templexxx/cpu v0.0.10-0.20211111114238-98168dcec14a
 
+replace github.com/go-gost/x => ../x
+
+replace github.com/go-gost/core => ../core
+
 require (
 	github.com/go-gost/core v0.0.0-20240131151724-a06608ccafbf
 	github.com/go-gost/x v0.0.0-20240131151842-25dcf536c6f5
@@ -13,13 +17,16 @@ require (
 require (
 	github.com/aead/chacha20 v0.0.0-20180709150244-8b13a72661da // indirect
 	github.com/alecthomas/units v0.0.0-20211218093645-b94a6e3cc137 // indirect
+	github.com/andybalholm/brotli v1.0.6 // indirect
 	github.com/asaskevich/govalidator v0.0.0-20210307081110-f21760c49a8d // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/bytedance/sonic v1.10.2 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20230717121745-296ad89f973d // indirect
 	github.com/chenzhuoyu/iasm v0.9.1 // indirect
-	github.com/coreos/go-iptables v0.5.0 // indirect
+	github.com/cloudflare/circl v1.3.7 // indirect
+	github.com/coreos/go-iptables v0.6.0 // indirect
+	github.com/daeuniverse/softwind v0.0.0-20240125045015-94186ddaef35 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.3 // indirect
@@ -46,6 +53,7 @@ require (
 	github.com/gorilla/websocket v1.5.1 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
+	github.com/klauspost/compress v1.17.4 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.6 // indirect
 	github.com/klauspost/reedsolomon v1.11.8 // indirect
 	github.com/leodido/go-urn v1.2.4 // indirect
@@ -56,6 +64,7 @@ require (
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
+	github.com/mzz2017/quic-go v0.0.0-20231230054300-5221ce9164a3 // indirect
 	github.com/onsi/ginkgo/v2 v2.12.0 // indirect
 	github.com/patrickmn/go-cache v2.1.0+incompatible // indirect
 	github.com/pelletier/go-toml/v2 v2.1.1 // indirect
@@ -73,6 +82,7 @@ require (
 	github.com/quic-go/qtls-go1-20 v0.4.1 // indirect
 	github.com/quic-go/quic-go v0.40.1 // indirect
 	github.com/quic-go/webtransport-go v0.6.0 // indirect
+	github.com/refraction-networking/utls v1.6.2 // indirect
 	github.com/riobard/go-bloom v0.0.0-20200614022211-cdc8013cb5b3 // indirect
 	github.com/rs/xid v1.3.0 // indirect
 	github.com/sagikazarmark/locafero v0.4.0 // indirect
@@ -97,15 +107,16 @@ require (
 	github.com/xtaci/kcp-go/v5 v5.6.5 // indirect
 	github.com/xtaci/smux v1.5.24 // indirect
 	github.com/xtaci/tcpraw v1.2.25 // indirect
+	github.com/xtls/reality v0.0.0-20231112171332-de1173cf2b19 // indirect
 	github.com/yl2chen/cidranger v1.0.2 // indirect
 	go.uber.org/mock v0.3.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/arch v0.6.0 // indirect
-	golang.org/x/crypto v0.17.0 // indirect
+	golang.org/x/crypto v0.18.0 // indirect
 	golang.org/x/exp v0.0.0-20231219180239-dc181d75b848 // indirect
 	golang.org/x/mod v0.14.0 // indirect
-	golang.org/x/net v0.19.0 // indirect
-	golang.org/x/sys v0.15.0 // indirect
+	golang.org/x/net v0.20.0 // indirect
+	golang.org/x/sys v0.16.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 	golang.org/x/time v0.5.0 // indirect
 	golang.org/x/tools v0.16.0 // indirect
