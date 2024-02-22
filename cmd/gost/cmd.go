@@ -385,7 +385,7 @@ func buildServiceConfig(url *url.URL) (*config.ServiceConfig, error) {
 	delete(m, "auth")
 
 	var realityConfig *config.REALITYConfig
-	if listener == "reality" {
+	if listener == "reality" || listener == "mreality" || listener == "tlr" || listener == "mtlr" {
 		// REALITY Mode
 		realityConfig = &config.REALITYConfig{
 			Show:        mdutil.GetBool(md, "show"),
@@ -518,7 +518,7 @@ func buildNodeConfig(url *url.URL) (*config.NodeConfig, error) {
 	delete(m, "auth")
 
 	var realityConfig *config.REALITYConfig
-	if dialer == "reality" {
+	if dialer == "reality" || dialer == "mreality" || dialer == "tlr" || dialer == "mtlr" {
 		// REALITY Mode
 		realityConfig = &config.REALITYConfig{
 			Show: mdutil.GetBool(md, "show"),
