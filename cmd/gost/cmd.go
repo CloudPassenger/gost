@@ -384,6 +384,41 @@ func buildServiceConfig(url *url.URL) (*config.ServiceConfig, error) {
 	}
 	delete(m, "auth")
 
+	var realityConfig *config.REALITYConfig
+	if listener == "reality" {
+		// REALITY Mode
+		realityConfig = &config.REALITYConfig{
+			Show:        mdutil.GetBool(md, "show"),
+			Dest:        mdutil.GetString(md, "dest"),
+			Xver:        uint64(mdutil.GetInt(md, "xver")),
+			PrivateKey:  mdutil.GetString(md, "privateKey"),
+			MaxTimeDiff: mdutil.GetDuration(md, "maxTimeDiff"),
+			// ServerName:  mdutil.GetString(md, "serverName"),
+			// PublicKey:   mdutil.GetString(md, "publicKey"),
+			// ShortId:     mdutil.GetString(md, "shortId"),
+		}
+		for _, sn := range strings.Split(mdutil.GetString(md, "serverNames"), ",") {
+			if sn = strings.TrimSpace(sn); sn == "" {
+				continue
+			}
+			realityConfig.ServerNames = append(realityConfig.ServerNames, sn)
+		}
+		for _, si := range strings.Split(mdutil.GetString(md, "shortIds"), ",") {
+			if si = strings.TrimSpace(si); si == "" {
+				continue
+			}
+			realityConfig.ShortIds = append(realityConfig.ShortIds, si)
+		}
+		delete(m, "show")
+		delete(m, "dest")
+		delete(m, "xver")
+		delete(m, "privateKey")
+		delete(m, "maxTimeDiff")
+		// delete(m, "serverName")
+		// delete(m, "publicKey")
+		// delete(m, "shortId")
+	}
+
 	tlsConfig := &config.TLSConfig{
 		CertFile: mdutil.GetString(md, "certFile", "cert"),
 		KeyFile:  mdutil.GetString(md, "keyFile", "key"),
@@ -417,6 +452,7 @@ func buildServiceConfig(url *url.URL) (*config.ServiceConfig, error) {
 	svc.Listener = &config.ListenerConfig{
 		Type:     listener,
 		TLS:      tlsConfig,
+		REALITY:  realityConfig,
 		Metadata: m,
 	}
 
@@ -481,6 +517,25 @@ func buildNodeConfig(url *url.URL) (*config.NodeConfig, error) {
 	}
 	delete(m, "auth")
 
+	var realityConfig *config.REALITYConfig
+	if dialer == "reality" {
+		// REALITY Mode
+		realityConfig = &config.REALITYConfig{
+			Show: mdutil.GetBool(md, "show"),
+			// Dest:        mdutil.GetString(md, "dest"),
+			// Xver:        uint64(mdutil.GetInt(md, "xver")),
+			// PrivateKey:  mdutil.GetString(md, "privateKey"),
+			// MaxTimeDiff: mdutil.GetDuration(md, "maxTimeDiff"),
+			ServerName: mdutil.GetString(md, "serverName"),
+			PublicKey:  mdutil.GetString(md, "publicKey"),
+			ShortId:    mdutil.GetString(md, "shortId"),
+		}
+		delete(m, "show")
+		delete(m, "serverName")
+		delete(m, "publicKey")
+		delete(m, "shortId")
+	}
+
 	tlsConfig := &config.TLSConfig{
 		CertFile:   mdutil.GetString(md, "certFile", "cert"),
 		KeyFile:    mdutil.GetString(md, "keyFile", "key"),
@@ -513,6 +568,7 @@ func buildNodeConfig(url *url.URL) (*config.NodeConfig, error) {
 	node.Dialer = &config.DialerConfig{
 		Type:     dialer,
 		TLS:      tlsConfig,
+		REALITY:  realityConfig,
 		Metadata: m,
 	}
 
