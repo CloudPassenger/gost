@@ -1,5 +1,9 @@
 cloud.google.com/go v0.26.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
+github.com/CloudPassenger/gost-core v0.0.0-20240223151125-595ebd99442f h1:683RkLYWwjBhWSUI29aye+3pxpvLhqpuRpQSMJkOaoQ=
+github.com/CloudPassenger/gost-core v0.0.0-20240223151125-595ebd99442f/go.mod h1:nSA7OnWGxfUteGQh9xcOt3udrBaydU+zfs0vX71+7/4=
+github.com/CloudPassenger/gost-x v0.0.0-20240223151827-84c3a1af63c9 h1:AqA5LxkeqrXz//3VHM46U14xq1dt/zb6zvmk2wUESnI=
+github.com/CloudPassenger/gost-x v0.0.0-20240223151827-84c3a1af63c9/go.mod h1:BHQGBZGnzLkA1Q3LP5YafDjZ/rEoiBGpsIQRrR2K8ho=
 github.com/aead/chacha20 v0.0.0-20180709150244-8b13a72661da h1:KjTM2ks9d14ZYCvmHS9iAKVt9AyzRSqNU1qabPih5BY=
 github.com/aead/chacha20 v0.0.0-20180709150244-8b13a72661da/go.mod h1:eHEWzANqSiWQsof+nXEI9bUVUyV6F53Fp89EuCh2EAA=
 github.com/alecthomas/units v0.0.0-20211218093645-b94a6e3cc137 h1:s6gZFSlWYmbqAuRjVTiNNhvNRfY2Wxp9nhfyel4rklc=

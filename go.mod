@@ -4,9 +4,9 @@ go 1.21
 
 replace github.com/templexxx/cpu v0.0.7 => github.com/templexxx/cpu v0.0.10-0.20211111114238-98168dcec14a
 
-replace github.com/go-gost/x => ../x
+replace github.com/go-gost/x => github.com/CloudPassenger/gost-x v0.0.0-20240223151827-84c3a1af63c9
 
-replace github.com/go-gost/core => ../core
+replace github.com/go-gost/core => github.com/CloudPassenger/gost-core v0.0.0-20240223151125-595ebd99442f
 
 require (
 	github.com/go-gost/core v0.0.0-20240131151724-a06608ccafbf
