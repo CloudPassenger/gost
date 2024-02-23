@@ -1,3 +1,183 @@
+# GO Simple Tunnel - Over Powered Edition
+
+## Enhanced Features
+
+- QUIC: Default to BBR, with [Brutal](https://hysteria.network/zh/docs/misc/Hysteria-Brutal/) fixed-rate congestion control by [Hysteria](https://hysteria.network/)
+- REALITY: Support Transport Layer [REALITY](https://github.com/XTLS/REALITY) by [Xray](https://xtls.github.io), can be used as server and client, supports multiplexing
+- Forward: Traffic forwarding supports Proxy Protocol to pass client IP (TCP only)
+
+## Configuration Example
+
+### QUIC + Brutal
+
+CLI (Server)
+
+`gost -L http+quic://:6666?recvMbps=100`
+
+CLI (Client)
+
+`gost -L http://:10880 -F http+quic://myserver.ltd:6666?sendMbps=100`
+
+YAML (Server)
+
+```yaml
+services:
+- name: service-0
+  addr: :6666
+  handler:
+    type: http
+  listener:
+    type: quic
+    metadata:
+      recvMbps: 100
+      maxStreams: 1024
+      initStreamReceiveWindow: 8388608
+      maxStreamReceiveWindow: 8388608
+      initConnReceiveWindow: 20971520
+      maxConnReceiveWindow: 20971520
+      DisablePathMTUDiscovery: false
+```
+
+YAML (Client)
+
+```yaml
+services:
+- name: service-0
+  addr: ":10880"
+  handler:
+    type: http
+    chain: chain-0
+  listener:
+    type: tcp
+chains:
+- name: chain-0
+  hops:
+  - name: hop-0
+    nodes:
+    - name: node-0
+      addr: myserver.ltd:6666
+      connector:
+        type: http
+      dialer:
+        type: quic
+        metadata:
+          sendMbps: 100
+          maxStreams: 1024
+          initStreamReceiveWindow: 8388608
+          maxStreamReceiveWindow: 8388608
+          initConnReceiveWindow: 20971520
+          maxConnReceiveWindow: 20971520
+          DisablePathMTUDiscovery: false
+```
+
+> [!NOTE]
+> Please refer to [Hysteria Documentation](https://v2.hysteria.network/docs/advanced/Full-Server-Config/#quic-parameters) QUIC Configuration section for specific parameters with the same meaning.
+
+> [!WARNING] 
+> It is important to check the server parameters in advance when using Brutal congestion, as misconfiguration can lead to network crashes, as well as deactivation by the hosting provider or network restriction by the operator due to brute force packet sending.
+
+### REALITY
+
+CLI (Server)
+
+`gost -L="http+tlr://:8888?dest=ocsp.apple.com:443&privateKey=OAKBrpGrtUUGzdYbtqNSMrBeAbLZfmd6w3tdesPCPUo&serverNames=ocsp.apple.com&shortIds=cafe123456780000"`
+
+> [!TIP]
+> Dialer name can be `tlr` or `reality`, and `mtlr` or `mreality` for multiplexing
+> TLR stands for *Transport Layer REALITY*
+
+CLI (Client)
+
+`gost -L http://:10880 -F="http+tlr://myserver.tld:8888?serverName=ocsp.apple.com&publicKey=XslBGcN9ChALOZRiDWmh6CfgwvJ8n9cx65egDAnNUzQ&shortId=cafe123456780000"`
+
+YAML (Server)
+
+```yaml
+services:
+- name: service-0
+  addr: :8888
+  handler:
+    type: http
+  listener:
+    type: reality
+    reality:
+      show: false
+      xver: 0
+      dest: "ocsp.apple.com:443"
+      privateKey: "OAKBrpGrtUUGzdYbtqNSMrBeAbLZfmd6w3tdesPCPUo"
+      maxTimeDiff: 30m
+      serverNames:
+        - "ocsp.apple.com"
+      shortIds:
+        - "cafe123456780000"
+```
+
+YAML (Client)
+
+```yaml
+services:
+- name: service-0
+  addr: ":10880"
+  handler:
+    type: http
+    chain: chain-0
+  listener:
+    type: tcp
+chains:
+- name: chain-0
+  hops:
+  - name: hop-0
+    nodes:
+    - name: node-0
+      addr: myserver.tld:8888
+      connector:
+        type: http
+      dialer:
+        type: reality
+        reality:
+          show: false
+          serverName: ocsp.apple.com
+          publicKey: XslBGcN9ChALOZRiDWmh6CfgwvJ8n9cx65egDAnNUzQ
+          shortId: cafe123456780000
+```
+
+> [!NOTE]
+> Please refer to [Xray Documentation](https://xtls.github.io/config/transport.html#realityobject) RealityObject Configuration section for specific parameters, which have the same meaning.
+
+### Forward with Proxy Protocol
+
+Supported only in configuration files, TCP protocol only
+
+```yaml
+services:
+- name: service-0
+  addr: :8080
+  handler:
+    type: tcp
+  listener:
+    type: tcp
+  forwarder:
+    nodes:
+    - name: target-0
+      addr: 192.168.1.1:80
+  metadata:
+    sendProxy: 2 # 0: disabled, 1: Proxy Protocol v1, 2: Proxy Protocol v2
+```
+
+Compatible with all proxy chains, the Proxy Protocol header is appended to the forwarded data when it is received and forwarded to the target node.
+
+
+## Related Projects
+
+- [Hysteria](https://v2.hysteria.network/) - A powerful, lightning fast and censorship resistant proxy.
+- [quic-go](https://github.com/mzz2017/quic-go) - Modified version of quic-go to support Hysteria's Brutal and BBR congestion.
+- [Xray](https://xtls.github.io/) - a set of network proxy tools
+- [REALITY](https://github.com/XTLS/REALITY) - A secure transport layer for network traffic concealment
+
+------
+
+Here is the original README
+
 # GO Simple Tunnel
 
 ### A simple security tunnel written in golang
