@@ -179,7 +179,7 @@ services:
 
 ### GO语言实现的安全隧道
 
-[English README](README_en.md)
+[![zh](https://img.shields.io/badge/Chinese%20README-green)](README.md) [![en](https://img.shields.io/badge/English%20README-gray)](README_en.md)
 
 ## 功能特性
 
@@ -199,7 +199,7 @@ services:
 - [x] [Prometheus监控指标](https://gost.run/tutorials/metrics/)
 - [x] [动态配置](https://gost.run/tutorials/api/config/)
 - [x] [Web API](https://gost.run/tutorials/api/overview/)
-- [ ] Web UI
+- [ ] GUI/WebUI
 
 ## 概览
 
@@ -256,6 +256,16 @@ go build
 docker run --rm gogost/gost -V
 ```
 
+## 工具
+
+### GUI
+
+[go-gost/gostctl](https://github.com/go-gost/gostctl)
+
+### WebUI
+
+[cnwhy/gost-ui](https://github.com/cnwhy/gost-ui)
+
 ### Shadowsocks Android插件
 
 [xausky/ShadowsocksGostPlugin](https://github.com/xausky/ShadowsocksGostPlugin)
@@ -264,7 +274,9 @@ docker run --rm gogost/gost -V
 
 Wiki站点：[https://gost.run](https://gost.run)
 
-Telegram讨论群：[https://t.me/gogost](https://t.me/gogost)
+YouTube: [https://www.youtube.com/@gost-tunnel](https://www.youtube.com/@gost-tunnel)
+
+Telegram：[https://t.me/gogost](https://t.me/gogost)
 
 Google讨论组：[https://groups.google.com/d/forum/go-gost](https://groups.google.com/d/forum/go-gost)
 
